@@ -1,21 +1,31 @@
 (function () {
-  // ---- Year ----
+  'use strict';
+
+  // ---- Copyright year ----
   var yr = document.getElementById('yr');
   if (yr) yr.textContent = new Date().getFullYear();
 
   // ---- Mobile menu ----
   var burger = document.getElementById('burger'),
       nav    = document.getElementById('nav');
+
   if (burger && nav) {
-    burger.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
-      burger.setAttribute('aria-expanded', open);
+    var setMenu = function (open) {
+      nav.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', String(open));
       burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    burger.addEventListener('click', function () {
+      setMenu(!nav.classList.contains('open'));
     });
     nav.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        nav.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
+      if (e.target.tagName === 'A') setMenu(false);
+    });
+    // Escape closes the menu and returns focus to the toggle
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        setMenu(false);
+        burger.focus();
       }
     });
   }
@@ -34,7 +44,7 @@
     var select = function (tab) {
       tabs.forEach(function (t) {
         var on = t === tab;
-        t.setAttribute('aria-selected', on);
+        t.setAttribute('aria-selected', String(on));
         t.tabIndex = on ? 0 : -1;
         var panel = document.getElementById(t.getAttribute('aria-controls'));
         if (panel) panel.hidden = !on;
@@ -49,6 +59,53 @@
         if (e.key === 'Home')       n = tabs[0];
         if (e.key === 'End')        n = tabs[tabs.length - 1];
         if (n) { e.preventDefault(); select(n); n.focus(); }
+      });
+    });
+  }
+
+  // ---- Contact form: AJAX submit, keeps the visitor on the site ----
+  // Falls back to a normal POST if JS is unavailable.
+  var form = document.getElementById('contact-form');
+  if (form) {
+    var status = document.getElementById('form-status');
+    var btn    = document.getElementById('form-submit');
+
+    var say = function (msg, ok) {
+      status.textContent = msg;
+      status.className = 'form__status ' + (ok ? 'form__status--ok' : 'form__status--err');
+    };
+
+    form.addEventListener('submit', function (e) {
+      if (!window.fetch) return; // let the browser POST normally
+      e.preventDefault();
+
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      btn.disabled = true;
+      var original = btn.textContent;
+      btn.textContent = 'Sending\u2026';
+      say('Sending your message\u2026', true);
+
+      fetch('https://formsubmit.co/ajax/' + form.dataset.to, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (res.ok) {
+          form.reset();
+          say('Thank you. Your message is on its way and Michelle will be in touch soon. If it is urgent, please call 704-676-2661.', true);
+        } else {
+          throw new Error('bad response');
+        }
+      })
+      .catch(function () {
+        say('Something went wrong sending that. Please email EarlyBloomersllc@gmail.com or call 704-676-2661 instead.', false);
+      })
+      .then(function () {
+        btn.disabled = false;
+        btn.textContent = original;
       });
     });
   }
