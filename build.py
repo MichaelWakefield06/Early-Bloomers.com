@@ -141,7 +141,7 @@ def shell(page, title, desc, body):
 '''
 
 
-def phero(eyebrow, h1, lede, stair=True):
+def phero(eyebrow, h1, lede, stair=False):
     tail = STAIR.format(mod="") if stair else ""
     return f'''<section class="phero">
   <div class="wrap">
@@ -696,8 +696,7 @@ about = phero(
     "About",
     f"Hi, I'm {OWNER}",
     "Early Bloomers was born from a leap of faith and a deep passion for serving children and "
-    f"families. Here's how it started, and why I'm honored to walk alongside yours.",
-    stair=False
+    f"families. Here's how it started, and why I'm honored to walk alongside yours."
 ) + f'''
 <section class="band">
   <div class="wrap">
