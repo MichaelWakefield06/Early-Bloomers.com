@@ -548,14 +548,14 @@ for i, (label, title, sub, items) in enumerate(BANDS, 1):
     tabs_html += (f'        <button class="ms__tab" type="button" role="tab" id="t-{i}" '
                   f'aria-controls="p-{i}" aria-selected="{sel}"{tabindex}>{label}</button>\n')
     lis = "\n".join(f'          <li><span class="ms__dot" aria-hidden="true"></span>{x}</li>' for x in items)
-    panels_html += f'''      <div class="ms__panel" role="tabpanel" id="p-{i}" aria-labelledby="t-{i}" tabindex="0"{hidden}>
+    panels_html += f'''      <div class="ms__panel" role="tabpanel" id="p-{i}" aria-labelledby="t-{i}"{hidden}>
         <h3>{title}</h3>
         <p class="ms__age">{label} &mdash; {sub}</p>
         <ul class="ms__list">
 {lis}
         </ul>
         <div class="ms__foot">
-          <a href="https://www.cdc.gov/act-early/milestones/index.html" target="_blank" rel="noopener">Full CDC checklist for this age<span class="visually-hidden"> (opens in a new tab)</span></a>
+          <a href="https://www.cdc.gov/act-early/milestones/index.html" target="_blank" rel="noopener">See the CDC&rsquo;s full milestone checklists<span class="visually-hidden"> (opens in a new tab)</span></a>
         </div>
       </div>
 '''
@@ -855,6 +855,8 @@ contact = phero(
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
         <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <p class="form__req">Fields marked <span class="req">*</span> are required.</p>
 
         <fieldset>
           <legend>About you</legend>
