@@ -694,7 +694,8 @@ resources = phero(
 about = phero(
     "About",
     f"Hi, I'm {OWNER}",
-    f"{OWNER_TITLE} at Early Bloomers LLC, serving families across {COUNTIES_SHORT} counties."
+    "Early Bloomers was born from a leap of faith and a deep passion for serving children and "
+    f"families. Here's how it started, and why I'm honored to walk alongside yours."
 ) + f'''
 <section class="band">
   <div class="wrap">
@@ -707,23 +708,50 @@ about = phero(
       </figure>
 
       <div>
-        <p class="eyebrow">{SM}Why I started Early Bloomers</p>
-        <h2>Known, supported, and encouraged</h2>
-        <p class="lede" style="max-width:none;margin-top:1.2rem">
-          I started Early Bloomers because I wanted to serve families in a more personal,
-          relationship-centered way. After years of working in early intervention, I felt called to
-          build a company where children and families are truly known, supported, and encouraged
-          every step of the way.
-        </p>
-        <p class="lede" style="max-width:none">
-          I believe parents are the most important people in a child's development. My goal is to
-          partner with families by providing practical strategies that fit naturally into their daily
-          routines, celebrating every milestone along the way. I strive to build genuine
-          relationships, communicate openly, and create individualized plans that help each child
-          reach their fullest potential.
-        </p>
+        <p class="eyebrow">{SM}In my own words</p>
+        <h2>A leap of faith</h2>
+        <div class="story">
+          <p>
+            My name is {OWNER}, and I am the owner of Early Bloomers Early Intervention.
+            Early Bloomers was born from a leap of faith and a deep passion for serving children
+            and families. After nearly a decade as an Early Interventionist, I felt God calling me
+            to step out of the familiar and build something of my own: an organization rooted in
+            compassion, excellence, and the belief that every child deserves the opportunity to
+            thrive.
+          </p>
+        </div>
       </div>
     </div>
+
+    <div class="story story--full rv">
+      <p>
+        The journey wasn't without uncertainty. Starting a business came with countless unknowns,
+        but God faithfully opened doors every step of the way. During the development of Early
+        Bloomers, Bloom &amp; Blossom graciously welcomed me, providing support, encouragement, and
+        the opportunity to continue serving families while laying the foundation for my own company.
+        Their kindness became an important stepping stone in turning this dream into reality.
+      </p>
+      <p>
+        Soon after taking that leap, my husband and I received another incredible blessing: we found
+        out we were expecting our miracle baby after several years of infertility. It was a season
+        filled with both new beginnings and constant reminders of God's faithfulness. As Early
+        Bloomers continued to grow, so did my appreciation for His perfect timing.
+      </p>
+      <p>
+        Today, Early Bloomers Early Intervention exists to partner with families, celebrate every
+        milestone, and empower children to reach their fullest potential. I am honored to walk
+        alongside families during some of the most important years of their children's lives, and I
+        look forward to growing little minds one step at a time.
+      </p>
+    </div>
+
+    <figure class="quote rv" style="max-width:900px;margin-inline:auto">
+      <blockquote>
+        &ldquo;More than just a business, it is the fulfillment of a calling and a testament to what
+        God can do when we choose faith over fear.&rdquo;
+      </blockquote>
+      <figcaption>{OWNER}, {OWNER_TITLE}</figcaption>
+    </figure>
 
     <ul class="creds creds--wide rv">
       <li>{STAR}<span>BabyNet Early Intervention Provider</span></li>
