@@ -1,16 +1,27 @@
 #!/usr/bin/env python3
-"""Assembles the Early Bloomers static site from a shared shell.
-Run:  python3 build.py    (outputs .html files next to styles.css)"""
+"""Early Bloomers LLC — static site generator.
+
+Edit the CONSTANTS below, run `python3 build.py`, and every page updates.
+Nothing here is required to host the site; GitHub Pages ignores this file.
+"""
 
 import pathlib
 
 OUT = pathlib.Path(__file__).parent
 
+# ---------------------------------------------------------------- constants
 SLOGAN = "Growing little minds one step at a time."
+OWNER = "Michelle Lopez"
+OWNER_TITLE = "Owner and Early Interventionist"
 PHONE_DISPLAY = "704-676-2661"
 PHONE_HREF = "+17046762661"
 FAX_DISPLAY = "864-751-4352"
-EMAIL = "earlybloomersllc@gmail.com"
+EMAIL = "EarlyBloomersllc@gmail.com"
+HOURS = "Monday&ndash;Friday, 8:00&nbsp;AM&ndash;5:00&nbsp;PM"
+COUNTIES = "Greenville, Spartanburg, and Pickens counties, South Carolina"
+COUNTIES_SHORT = "Greenville, Spartanburg &amp; Pickens"
+AGES = "birth to five"
+BUILDER = "WB3 Ventures LLC"
 
 NAV = [
     ("index.html", "Home"),
@@ -20,14 +31,17 @@ NAV = [
     ("about.html", "About"),
 ]
 
-STEPMARK = '<span class="stepmark" aria-hidden="true"><i></i><i></i><i></i></span>'
+SM = '<span class="stepmark" aria-hidden="true"><i></i><i></i><i></i></span>'
 
-STAIR = '''<svg class="stair {mod}" viewBox="0 0 1200 34" preserveAspectRatio="none" aria-hidden="true">
-  <path fill="currentColor" d="M0 34h150V25h150v-6h150v-5h150v-5h150V4h150V0h300v34z"/>
-</svg>'''
+STAIR = ('<svg class="stair{mod}" viewBox="0 0 1200 38" preserveAspectRatio="none" '
+         'aria-hidden="true" focusable="false">'
+         '<path fill="currentColor" d="M0 38h150V28h150v-7h150v-6h150v-6H900V4h150V0h150v38z"/></svg>')
+
+STAR = ('<svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" '
+        'focusable="false"><path d="M10 1l2.6 5.3 5.9.8-4.3 4.1 1 5.8L10 14.3 4.8 17l1-5.8L1.5 7.1l5.9-.8L10 1z"/></svg>')
 
 
-def shell(page, title, desc, body, extra_head=""):
+def shell(page, title, desc, body):
     links = ""
     for href, label in NAV:
         cur = ' aria-current="page"' if href == page else ""
@@ -41,7 +55,9 @@ def shell(page, title, desc, body, extra_head=""):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
+<meta name="author" content="Early Bloomers LLC">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Early Bloomers LLC">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:image" content="Images/Image1.jpg">
@@ -49,9 +65,9 @@ def shell(page, title, desc, body, extra_head=""):
 <link rel="icon" href="Images/EBLogo1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-{extra_head}</head>
+</head>
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -59,14 +75,15 @@ def shell(page, title, desc, body, extra_head=""):
 <header class="hdr" id="hdr">
   <div class="hdr__in">
     <a class="brand" href="index.html">
-      <img class="brand__logo" src="Images/EBLogo1.png" alt="Early Bloomers logo: a periwinkle flower with green leaves">
+      <img class="brand__logo" src="Images/EBLogo1.png" width="104" height="104"
+           alt="Early Bloomers LLC logo: a periwinkle flower with green leaves inside a gold arch">
       <span>
         <span class="brand__name">Early Bloomers</span>
         <span class="brand__tag">{SLOGAN}</span>
       </span>
     </a>
 
-    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+    <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
     </button>
 
@@ -86,10 +103,10 @@ def shell(page, title, desc, body, extra_head=""):
       <div class="ftr__brand">
         <b>Early Bloomers LLC</b>
         <p class="ftr__slogan">{SLOGAN}</p>
-        <p>Early intervention for infants and toddlers, delivered in the places your family already lives — in partnership with you, not around you.</p>
+        <p>Early intervention and developmental services for children {AGES}, delivered in the places your family already lives. Serving {COUNTIES_SHORT} counties.</p>
       </div>
       <div>
-        <h4>Explore</h4>
+        <h2>Explore</h2>
         <ul>
           <li><a href="services.html">Services</a></li>
           <li><a href="milestones.html">Milestones</a></li>
@@ -99,19 +116,22 @@ def shell(page, title, desc, body, extra_head=""):
         </ul>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h2>Contact</h2>
         <ul>
           <li><a href="tel:{PHONE_HREF}">{PHONE_DISPLAY}</a></li>
           <li>Fax: {FAX_DISPLAY}</li>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
+          <li>{HOURS}</li>
           <li><a href="https://www.scdhhs.gov/resources/programs-and-initiatives/babynet" target="_blank" rel="noopener">BabyNet (SCDHHS)</a></li>
         </ul>
       </div>
     </div>
+
     <div class="ftr__base">
       <span>&copy; <span id="yr">2026</span> Early Bloomers LLC. All rights reserved.</span>
-      <span>Information on this site is educational and is not medical advice.</span>
+      <span>Site built by {BUILDER}</span>
     </div>
+    <p class="ftr__legal">The information on this site is educational and is not medical advice, a developmental screening, or a diagnosis. Developmental milestones referenced here are adapted from the Centers for Disease Control and Prevention&rsquo;s &ldquo;Learn the Signs. Act Early.&rdquo; program and are not developmental guidelines or standards. If you have concerns about your child&rsquo;s development, talk with your child&rsquo;s doctor and ask about developmental screening.</p>
   </div>
 </footer>
 
@@ -124,7 +144,7 @@ def shell(page, title, desc, body, extra_head=""):
 def phero(eyebrow, h1, lede):
     return f'''<section class="phero">
   <div class="wrap">
-    <p class="eyebrow">{STEPMARK}{eyebrow}</p>
+    <p class="eyebrow">{SM}{eyebrow}</p>
     <h1>{h1}</h1>
     <p class="lede">{lede}</p>
   </div>
@@ -132,27 +152,37 @@ def phero(eyebrow, h1, lede):
 {STAIR.format(mod="")}'''
 
 
-# ============================================================ HOME
+def slogan_band():
+    return f'''<section class="slogan-band" aria-label="Our slogan">
+  <div class="wrap">
+    <span class="stepmark" aria-hidden="true"><i></i><i></i><i></i></span>
+    <p>{SLOGAN}</p>
+  </div>
+</section>'''
+
+
+# ================================================================= HOME
 home = f'''<section class="hero wrap">
   <div class="hero__grid">
     <div>
-      <p class="eyebrow">{STEPMARK}Birth to three &middot; [Your counties], SC</p>
+      <p class="eyebrow">{SM}Birth to five &middot; {COUNTIES_SHORT}, SC</p>
       <h1>If you're wondering whether to <em>wait and see</em> &mdash; don't.</h1>
+      <p class="hero__slogan">{SLOGAN}</p>
       <p class="lede">
-        Trusting your gut about your child's development isn't overreacting. It's the most
-        useful thing a parent can do. Early Bloomers is an early intervention provider working
-        with families across [your counties] &mdash; coaching, assessing, and connecting you to
-        what your child needs. Growing little minds one step at a time.
+        Trusting your gut about your child's development isn't overreacting. It's the most useful
+        thing a parent can do. Early Bloomers is an early intervention practice serving families
+        across {COUNTIES_SHORT} counties, one step at a time.
       </p>
       <div class="hero__actions">
         <a class="btn btn--primary" href="contact.html">Refer a child</a>
         <a class="btn btn--ghost" href="milestones.html">See milestones by age</a>
       </div>
-      <p class="hero__note">Anyone can make a referral &mdash; a parent, doctor, caregiver, teacher, or friend. You don't need a diagnosis to start.</p>
+      <p class="hero__note">Anyone can make a referral: a parent, doctor, caregiver, teacher, or friend. You don't need a diagnosis to start.</p>
     </div>
 
     <div class="hero__art">
-      <img src="Images/Image1.jpg" alt="An early interventionist sitting on the floor playing with a toddler during a home visit" fetchpriority="high">
+      <img src="Images/Image1.jpg" width="800" height="680" fetchpriority="high"
+           alt="A toddler sitting on a rug, focused on pushing a wooden toy train along a track">
       <div class="hero__badge">
         <b>No cost</b>
         <span>Children who meet BabyNet eligibility are served regardless of family income.</span>
@@ -161,8 +191,9 @@ home = f'''<section class="hero wrap">
   </div>
 </section>
 
-<section class="band band--white">
+<section class="band band--white" aria-labelledby="why-h">
   <div class="wrap">
+    <h2 class="visually-hidden" id="why-h">Why families reach out</h2>
     <div class="tiles rv">
       <div class="tile">
         <h3>You know your child best</h3>
@@ -170,33 +201,36 @@ home = f'''<section class="hero wrap">
       </div>
       <div class="tile">
         <h3>The brain is never faster</h3>
-        <p>More than a million neural connections form every second in the first three years. Support lands harder now than it ever will again.</p>
+        <p>More than a million neural connections form every second in the first years of life. Support lands harder now than it ever will again.</p>
       </div>
       <div class="tile">
         <h3>Learning happens in the ordinary</h3>
-        <p>Meals, baths, car rides, play. We coach you through the routines you already have, rather than adding new ones.</p>
+        <p>Meals, baths, car rides, play. We work inside the routines you already have rather than adding new ones to your week.</p>
       </div>
     </div>
   </div>
 </section>
 
+{slogan_band()}
+
 <section class="band">
   <div class="wrap">
     <div class="shead rv">
-      <p class="eyebrow">{STEPMARK}What we do</p>
+      <p class="eyebrow">{SM}What we do</p>
       <h2>Three ways we walk alongside your family</h2>
-      <p class="lede">Every plan starts with your priorities. Nothing here is off the shelf.</p>
+      <p class="lede">Every plan starts with your priorities and your child's strengths. Nothing here is off the shelf.</p>
     </div>
 
     <div class="cards rv">
       <article class="card">
-        <img src="Images/Image2.avif" alt="An early interventionist and toddler engaged in play-based learning on the floor">
+        <img src="Images/Image2.avif" width="600" height="450"
+             alt="An adult and a young child sitting together on the floor during a play-based learning activity">
         <div class="card__body">
           <h3>Early Intervention Sessions</h3>
-          <p>Regular one-hour visits with you and your child, using play-based strategies built around their interests.</p>
+          <p>Regular one-hour visits with you and your child, using play-based strategies built around what already holds their attention.</p>
           <ul>
-            <li>Weekly or bi-weekly, in your home</li>
-            <li>Play-based, research-backed strategies</li>
+            <li>In your home, daycare, or community</li>
+            <li>Research-based strategies</li>
             <li>Coaching so you can carry it into the week</li>
             <li>Your time to ask anything</li>
           </ul>
@@ -204,44 +238,46 @@ home = f'''<section class="hero wrap">
       </article>
 
       <article class="card">
-        <img src="Images/Image3.png" alt="A child stacking wooden blocks while an interventionist observes and records progress">
+        <img src="Images/Image3.png" width="600" height="450"
+             alt="A young child stacking colourful wooden blocks on a table">
         <div class="card__body">
           <h3>Developmental Assessments</h3>
-          <p>A look at the whole child every six months, so everyone can see progress and make better decisions together.</p>
+          <p>A look at the whole child across six areas of development, so everyone can see what's moved and decide what comes next together.</p>
           <ul>
-            <li>Six areas of development</li>
-            <li>Every six months</li>
-            <li>Plain-language results</li>
+            <li>Six developmental areas</li>
+            <li>Progress you can actually see</li>
             <li>Your input carries weight</li>
+            <li>Explained in plain language</li>
           </ul>
         </div>
       </article>
 
       <article class="card">
-        <img src="Images/Image4.jpg" alt="A caregiver and infant during a home visit while an interventionist takes notes">
+        <img src="Images/Image4.jpg" width="600" height="450"
+             alt="A caregiver holding a baby during a relaxed home visit">
         <div class="card__body">
           <h3>Service Coordination</h3>
-          <p>One person who keeps the whole picture straight, links you to outside resources, and makes referrals.</p>
+          <p>One person who keeps the whole picture straight, links you to outside resources, and makes referrals so you're not holding the system together alone.</p>
           <ul>
-            <li>Referrals for speech, OT, and PT</li>
-            <li>Navigating BabyNet and OIDD</li>
+            <li>Referrals for speech, OT, PT, and ABA</li>
+            <li>Navigating BabyNet and BHDD-OIDD</li>
             <li>Community resource linking</li>
-            <li>Transition planning at age three</li>
+            <li>Transition planning as your child grows</li>
           </ul>
         </div>
       </article>
     </div>
 
-    <p style="margin-top:2rem"><a class="btn btn--ghost" href="services.html">See how each one works &rarr;</a></p>
+    <p style="margin-top:2.4rem"><a class="btn btn--ghost" href="services.html">See how each one works</a></p>
   </div>
 </section>
 
 <section class="band band--leaf">
   <div class="wrap">
     <div class="shead rv">
-      <p class="eyebrow">{STEPMARK}How it works</p>
-      <h2>One step at a time, from first call to first visit</h2>
-      <p class="lede">Nobody expects you to know the system. That's our job &mdash; here's the shape of it.</p>
+      <p class="eyebrow">{SM}How it works</p>
+      <h2>Four steps to get started</h2>
+      <p class="lede">Nobody expects you to know the system. That part is our job.</p>
     </div>
 
     <div class="steps-h rv">
@@ -251,7 +287,7 @@ home = f'''<section class="hero wrap">
       </div>
       <div class="steps-h__item">
         <h3>Referral &amp; evaluation</h3>
-        <p>A referral goes to BabyNet and your child is evaluated at no cost to you.</p>
+        <p>A referral goes to BabyNet, and your child is evaluated at no cost to you.</p>
       </div>
       <div class="steps-h__item">
         <h3>Build the plan</h3>
@@ -259,18 +295,31 @@ home = f'''<section class="hero wrap">
       </div>
       <div class="steps-h__item">
         <h3>Start walking</h3>
-        <p>Regular sessions begin, and we adjust as your child grows.</p>
+        <p>Regular sessions begin, and we adjust the plan as your child grows.</p>
       </div>
     </div>
 
-    <p style="margin-top:2.4rem"><a class="btn btn--primary" href="contact.html">Take the first step</a></p>
+    <p style="margin-top:2.8rem"><a class="btn btn--primary" href="contact.html">Take the first step</a></p>
   </div>
 </section>
 
 <section class="band">
   <div class="wrap">
-    <div class="callout rv center" style="max-width:820px">
-      <p class="eyebrow" style="justify-content:center">{STEPMARK}Not sure yet?</p>
+    <figure class="quote rv" style="max-width:900px;margin-inline:auto">
+      <blockquote>
+        &ldquo;I believe parents are the most important people in a child's development. My goal is to
+        partner with families by providing practical strategies that fit naturally into their daily
+        routines, celebrating every milestone along the way.&rdquo;
+      </blockquote>
+      <figcaption>{OWNER}, {OWNER_TITLE}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="band band--white">
+  <div class="wrap">
+    <div class="callout rv center" style="max-width:860px">
+      <p class="eyebrow" style="justify-content:center">{SM}Not sure yet?</p>
       <h2>Wondering is a good enough reason to call.</h2>
       <p class="lede center">Most families who reach out aren't certain anything's wrong. That's normal. A conversation costs nothing, and often ends with us saying your child looks right on track.</p>
       <a class="btn btn--primary" href="contact.html">Get in touch</a>
@@ -278,65 +327,70 @@ home = f'''<section class="hero wrap">
   </div>
 </section>'''
 
-# ============================================================ SERVICES
+# ================================================================= SERVICES
 services = phero(
     "Services",
     "Support built around one child &mdash; yours",
-    "Early Bloomers provides early intervention for infants and toddlers: regular play-based "
-    "sessions, developmental assessments, and the service coordination that keeps everything "
-    "connected. Here's what each one actually looks like."
+    f"Early Bloomers provides early intervention and developmental services for children {AGES}: "
+    "regular play-based sessions, developmental assessments, and the service coordination that "
+    "keeps everything connected. Here is what each one actually looks like."
 ) + f'''
-<section class="band">
+<section class="band" aria-labelledby="svc-h">
   <div class="wrap">
+    <h2 class="visually-hidden" id="svc-h">What we provide</h2>
     <div class="cards rv">
       <article class="card">
-        <img src="Images/Image2.avif" alt="An early interventionist and toddler engaged in play-based learning on the floor">
+        <img src="Images/Image2.avif" width="600" height="450"
+             alt="An adult and a young child sitting together on the floor during a play-based learning activity">
         <div class="card__body">
           <h3>Early Intervention Sessions</h3>
-          <p>A weekly or bi-weekly one-hour session with you and your child. Your Early Interventionist uses play-based strategies to help your child learn and grow &mdash; and it's your time to ask questions and learn how best to help.</p>
+          <p>A one-hour session with you and your child, using play-based strategies to help your child learn and grow. It's also your time to ask questions and learn how best to help.</p>
           <ul>
-            <li>Built around your child's interests</li>
-            <li>In your home, daycare, or community</li>
+            <li>Built around your child's own interests</li>
+            <li>In your home, daycare, or the community</li>
             <li>Research-based strategies</li>
-            <li>Caregiver coaching, every session</li>
+            <li>Caregiver coaching in every session</li>
           </ul>
         </div>
       </article>
 
       <article class="card">
-        <img src="Images/Image3.png" alt="A child stacking wooden blocks while an interventionist observes and records progress">
+        <img src="Images/Image3.png" width="600" height="450"
+             alt="A young child stacking colourful wooden blocks on a table">
         <div class="card__body">
           <h3>Developmental Assessments</h3>
-          <p>Every six months, we assess how your child has progressed across six areas of development, so we get a look at the whole child rather than one slice of them.</p>
+          <p>An assessment across six areas of development, so we see the whole child rather than one slice of them, and so progress is visible to everyone.</p>
           <ul>
-            <li>Six developmental domains</li>
-            <li>Progress you can actually see</li>
-            <li>Everyone's input gathered</li>
+            <li>Six developmental areas</li>
+            <li>Gathers everyone's input, including yours</li>
+            <li>Guides what we work on next</li>
             <li>Explained in plain language</li>
           </ul>
         </div>
       </article>
 
       <article class="card">
-        <img src="Images/Image4.jpg" alt="A caregiver and infant during a home visit while an interventionist takes notes">
+        <img src="Images/Image4.jpg" width="600" height="450"
+             alt="A caregiver holding a baby during a relaxed home visit">
         <div class="card__body">
           <h3>Service Coordination</h3>
-          <p>Your Early Interventionist links you to outside resources and makes referrals for other services &mdash; so you're not the one holding the whole system together.</p>
+          <p>Linking your family to outside resources and making referrals for other services, so the pieces work together instead of landing on you to assemble.</p>
           <ul>
-            <li>Referrals for speech, physical, and occupational therapy</li>
-            <li>Assistive technology exploration</li>
-            <li>Community resources and supports</li>
-            <li>Transition planning as your child turns three</li>
+            <li>Referrals for speech and language therapy</li>
+            <li>Referrals for occupational and physical therapy</li>
+            <li>Referrals for ABA and other specialized services</li>
+            <li>Navigating BabyNet, BHDD-OIDD, and transitions</li>
           </ul>
         </div>
       </article>
     </div>
 
-    <div class="ms__disc rv" style="max-width:none;margin-top:2.4rem">
+    <div class="ms__disc rv" style="margin-top:2.6rem">
       <p><strong>About therapy services.</strong> Early Bloomers provides early intervention and
-      service coordination. We don't deliver speech, physical, or occupational therapy ourselves &mdash;
-      we connect your family to qualified providers who do, and we stay involved to make sure the
-      pieces work together. If your child needs one of those therapies, we'll say so and help you get there.</p>
+      developmental services directly, and coordinates care. Speech therapy, occupational therapy,
+      physical therapy, ABA, and other specialized services are referred to appropriate providers
+      when your child needs them. If one of those is the right next step, we will say so and help
+      you get there.</p>
     </div>
   </div>
 </section>
@@ -344,9 +398,9 @@ services = phero(
 <section class="band band--leaf">
   <div class="wrap">
     <div class="shead rv">
-      <p class="eyebrow">{STEPMARK}The path</p>
+      <p class="eyebrow">{SM}The path</p>
       <h2>Every step, in order</h2>
-      <p class="lede">This is the whole journey from the first phone call through your child's third birthday. Most families move through the early steps in [X] weeks.</p>
+      <p class="lede">This is the whole walk, from the first phone call through your child's transition out of services.</p>
     </div>
 
     <div class="steps rv">
@@ -354,7 +408,7 @@ services = phero(
         <div class="steps__num"></div>
         <div class="steps__body">
           <h3>You reach out</h3>
-          <p>Call, email, or send the contact form. Tell us what you're noticing &mdash; "he's almost two and not really talking yet" is plenty to start with. Anyone can make a referral: a parent, doctor, caregiver, teacher, or friend.</p>
+          <p>Call, email, or send the contact form. Tell us what you're noticing. &ldquo;He's almost two and not really talking yet&rdquo; is plenty to start with. Anyone can make a referral: a parent, doctor, caregiver, teacher, or friend.</p>
         </div>
       </div>
 
@@ -362,7 +416,7 @@ services = phero(
         <div class="steps__num"></div>
         <div class="steps__body">
           <h3>Referral to BabyNet</h3>
-          <p>BabyNet is South Carolina's early intervention system for children under three with developmental delays, or conditions associated with them. A referral can go through us, or you can call the Central Referral Team directly at 1-866-512-8881.</p>
+          <p>BabyNet is South Carolina's early intervention system for children under three with developmental delays, or with conditions associated with delays. A referral can go through us, or you can call the Central Referral Team yourself at 1-866-512-8881.</p>
         </div>
       </div>
 
@@ -378,7 +432,7 @@ services = phero(
         <div class="steps__num"></div>
         <div class="steps__body">
           <h3>We build the plan together</h3>
-          <p>You share your priorities, concerns, and hopes. We set goals that fit your family's values and your child's strengths &mdash; not a generic checklist.</p>
+          <p>You share your priorities, concerns, and hopes for your child. We set individualized goals that fit your family's values and build on your child's strengths, rather than working from a generic checklist.</p>
         </div>
       </div>
 
@@ -386,40 +440,42 @@ services = phero(
         <div class="steps__num"></div>
         <div class="steps__body">
           <h3>Sessions begin</h3>
-          <p>Regular visits start, in the places your child already spends their days. You're a huge part of the team &mdash; most of what works happens in the hours we're not there.</p>
+          <p>Regular visits start in the places your child already spends their days. You are a huge part of the team. Most of what works happens in the hours we are not there.</p>
         </div>
       </div>
 
       <div class="steps__item">
         <div class="steps__num"></div>
         <div class="steps__body">
-          <h3>We check the map every six months</h3>
-          <p>An assessment across six developmental areas shows what's moved. Goals get adjusted. Nothing runs on autopilot.</p>
+          <h3>We check the map as we go</h3>
+          <p>Assessment across six developmental areas shows what has moved. Goals get adjusted. Nothing runs on autopilot, and nothing continues just because it's on a plan somewhere.</p>
         </div>
       </div>
 
       <div class="steps__item">
         <div class="steps__num"></div>
         <div class="steps__body">
-          <h3>Transition at three</h3>
-          <p>BabyNet ends at age three. We help you plan what comes next well before you get there, whether that's continued services through OIDD, your school district, or nothing at all because your child is thriving.</p>
+          <h3>Transition</h3>
+          <p>BabyNet eligibility ends at age three. Some children continue through BHDD-OIDD, some move on to their school district, and some don't need anything further. We plan that step well before you get to it.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+{slogan_band()}
+
 <section class="band">
   <div class="wrap">
-    <div class="callout rv center" style="max-width:820px">
+    <div class="callout rv center" style="max-width:860px">
       <h2>Ready to take the first step?</h2>
-      <p class="lede center">It starts with a conversation. No referral needed to talk to us.</p>
+      <p class="lede center">It starts with a conversation. You don't need a referral to talk to us.</p>
       <a class="btn btn--primary" href="contact.html">Refer a child</a>
     </div>
   </div>
 </section>'''
 
-# ============================================================ MILESTONES
+# ================================================================= MILESTONES
 BANDS = [
     ("2\u20136 months", "The social baby", "Looking, smiling, and starting to answer back.", [
         "Smiles on their own to get your attention",
@@ -435,7 +491,7 @@ BANDS = [
         "Sits without support",
         "Picks up small things between thumb and finger",
         "Waves bye-bye",
-        'Calls a parent "mama" or "dada"',
+        "Calls a parent &ldquo;mama&rdquo; or &ldquo;dada&rdquo;",
     ]),
     ("15\u201318 months", "First words, first steps", "Pointing at the world and naming a bit of it.", [
         "Takes a few steps on their own",
@@ -446,20 +502,36 @@ BANDS = [
         "Moves away from you but checks back to be sure you're near",
     ]),
     ("2 years", "Words snap together", "Two words at a time, and noticing other people.", [
-        'Says at least two words together, like "more milk"',
+        "Says at least two words together, like &ldquo;more milk&rdquo;",
         "Points to things in a book when you ask",
         "Notices when others are hurt or upset",
         "Kicks a ball",
         "Runs",
         "Eats with a spoon",
     ]),
-    ("2\u00bd\u20133 years", "Conversations", "Being understood, and playing with other children.", [
+    ("3 years", "Conversations", "Being understood, and joining other children.", [
         "Talks with you in at least two back-and-forth exchanges",
-        "Says about three words together in a sentence",
-        "Most people can understand what they say",
-        "Plays alongside, and sometimes with, other children",
-        "Puts on some clothes by themselves",
+        "Asks who, what, where, or why questions",
+        "Says their first name when asked",
+        "Talks well enough for others to understand most of the time",
+        "Notices other children and joins them to play",
         "Draws a circle when you show them how",
+    ]),
+    ("4 years", "Stories and pretending", "Imagination, longer sentences, and helping.", [
+        "Pretends to be something else during play",
+        "Says sentences with four or more words",
+        "Talks about at least one thing that happened during their day",
+        "Names a few colours of things",
+        "Draws a person with three or more body parts",
+        "Comforts others who are hurt or sad",
+    ]),
+    ("5 years", "Ready for what's next", "Rules, rhymes, counting, and keeping a conversation going.", [
+        "Follows rules or takes turns when playing games with other children",
+        "Tells a story they heard or made up with at least two events",
+        "Keeps a conversation going with more than three back-and-forth exchanges",
+        "Counts to 10",
+        "Writes some letters in their name",
+        "Hops on one foot",
     ]),
 ]
 
@@ -469,9 +541,9 @@ for i, (label, title, sub, items) in enumerate(BANDS, 1):
     sel = "true" if i == 1 else "false"
     tabindex = "" if i == 1 else ' tabindex="-1"'
     hidden = "" if i == 1 else " hidden"
-    tabs_html += (f'        <button class="ms__tab" role="tab" id="t-{i}" aria-controls="p-{i}" '
-                  f'aria-selected="{sel}"{tabindex}>{label}</button>\n')
-    lis = "\n".join(f'          <li><span class="ms__dot"></span>{x}</li>' for x in items)
+    tabs_html += (f'        <button class="ms__tab" type="button" role="tab" id="t-{i}" '
+                  f'aria-controls="p-{i}" aria-selected="{sel}"{tabindex}>{label}</button>\n')
+    lis = "\n".join(f'          <li><span class="ms__dot" aria-hidden="true"></span>{x}</li>' for x in items)
     panels_html += f'''      <div class="ms__panel" role="tabpanel" id="p-{i}" aria-labelledby="t-{i}" tabindex="0"{hidden}>
         <h3>{title}</h3>
         <p class="ms__age">{label} &mdash; {sub}</p>
@@ -479,7 +551,7 @@ for i, (label, title, sub, items) in enumerate(BANDS, 1):
 {lis}
         </ul>
         <div class="ms__foot">
-          <a href="https://www.cdc.gov/act-early/milestones/index.html" target="_blank" rel="noopener">Full CDC checklist for this age &rarr;</a>
+          <a href="https://www.cdc.gov/act-early/milestones/index.html" target="_blank" rel="noopener">Full CDC checklist for this age<span class="visually-hidden"> (opens in a new tab)</span></a>
         </div>
       </div>
 '''
@@ -487,12 +559,13 @@ for i, (label, title, sub, items) in enumerate(BANDS, 1):
 milestones = phero(
     "Milestones by age",
     "Every child climbs at their own pace",
-    "These are examples of things most children &mdash; about 75% or more &mdash; can do by each age. "
-    "They're conversation starters, not a test. If something here gives you pause, that's worth a "
+    "These are examples of things most children, about 75% or more, can do by each age. They are "
+    "conversation starters, not a test. If something here gives you pause, that's worth a "
     "conversation, not a wait."
 ) + f'''
-<section class="band">
+<section class="band" aria-labelledby="ms-h">
   <div class="wrap">
+    <h2 class="visually-hidden" id="ms-h">Milestones by age band</h2>
     <div class="ms rv">
       <div class="ms__tabs" role="tablist" aria-label="Milestones by age">
 {tabs_html}      </div>
@@ -500,40 +573,42 @@ milestones = phero(
 
     <div class="ms__disc rv">
       <p><strong>Please read this part.</strong> These milestones are adapted from the CDC's
-      <a href="https://www.cdc.gov/act-early/index.html" target="_blank" rel="noopener">Learn the Signs. Act Early.</a>
+      <a href="https://www.cdc.gov/act-early/index.html" target="_blank" rel="noopener">Learn the Signs. Act Early.<span class="visually-hidden"> (opens in a new tab)</span></a>
       program. They are not developmental guidelines or standards, and this page is
       <strong>not a screening or diagnostic tool</strong>. It cannot tell you whether your child has a delay.</p>
       <p>Children develop at different rates, and a missed milestone on its own doesn't mean something
       is wrong. What it means is: bring it up. Talk to your child's doctor and ask about developmental
       screening. The American Academy of Pediatrics recommends screening at 9, 18, and 30 months, and
-      for autism at 18 and 24 months &mdash; or any time you or a provider has a concern.</p>
+      for autism at 18 and 24 months, or any time you or a provider has a concern.</p>
       <p>If your child has lost a skill they used to have, don't wait on that one. Call your doctor.</p>
     </div>
   </div>
 </section>
 
-<section class="band band--leaf">
+{slogan_band()}
+
+<section class="band">
   <div class="wrap">
-    <div class="callout rv center" style="max-width:820px">
-      <p class="eyebrow" style="justify-content:center">{STEPMARK}Something give you pause?</p>
+    <div class="callout rv center" style="max-width:860px">
+      <p class="eyebrow" style="justify-content:center">{SM}Something give you pause?</p>
       <h2>Then it's worth a conversation.</h2>
-      <p class="lede center">A referral costs nothing and commits you to nothing. We'd rather tell you your child is on track than have you spend six months wondering.</p>
+      <p class="lede center">A referral costs nothing and commits you to nothing. We would rather tell you your child is on track than have you spend six months wondering.</p>
       <a class="btn btn--primary" href="contact.html">Refer a child</a>
     </div>
   </div>
 </section>'''
 
-# ============================================================ RESOURCES
+# ================================================================= RESOURCES
 resources = phero(
     "Resources",
     "The map, and who else is on it",
     "Early intervention in South Carolina runs through a few different doors. Here are the ones "
-    "worth knowing about &mdash; including the ones that have nothing to do with us."
+    "worth knowing about, including the ones that have nothing to do with us."
 ) + f'''
 <section class="band">
   <div class="wrap">
     <div class="shead rv">
-      <p class="eyebrow">{STEPMARK}Start here</p>
+      <p class="eyebrow">{SM}Start here</p>
       <h2>South Carolina programs</h2>
     </div>
 
@@ -543,13 +618,13 @@ resources = phero(
           <h3>BabyNet</h3>
           <p>South Carolina's interagency early intervention system for infants and toddlers under three with developmental delays, or conditions associated with delays. Funded through IDEA and administered by SCDHHS. Anyone can make a referral, and services are provided at no cost to families.</p>
         </div>
-        <a class="btn btn--ghost" href="https://www.scdhhs.gov/resources/programs-and-initiatives/babynet" target="_blank" rel="noopener">Visit &rarr;</a>
+        <a class="btn btn--ghost" href="https://www.scdhhs.gov/resources/programs-and-initiatives/babynet" target="_blank" rel="noopener">Visit<span class="visually-hidden"> BabyNet (opens in a new tab)</span></a>
       </div>
 
       <div class="res__item">
         <div>
           <h3>BabyNet Central Referral Team</h3>
-          <p>Call 1-866-512-8881 to refer a child from birth to three, or complete the online referral form. You do not need a doctor's referral, and you don't need to go through us to do it.</p>
+          <p>Call to refer a child from birth to three, or complete the online referral form. You do not need a doctor's referral, and you do not need to go through us to do it.</p>
         </div>
         <a class="btn btn--ghost" href="tel:+18665128881">1-866-512-8881</a>
       </div>
@@ -557,9 +632,9 @@ resources = phero(
       <div class="res__item">
         <div>
           <h3>BHDD-OIDD (formerly DDSN)</h3>
-          <p>For children who are over three, or transitioning out of BabyNet. Eligibility line: 1-800-289-7012.</p>
+          <p>For children over three, or transitioning out of BabyNet. Early intervention services continue through OIDD up to age six. Eligibility line: 1-800-289-7012.</p>
         </div>
-        <a class="btn btn--ghost" href="https://ddsn.sc.gov/babynet" target="_blank" rel="noopener">Visit &rarr;</a>
+        <a class="btn btn--ghost" href="https://ddsn.sc.gov/babynet" target="_blank" rel="noopener">Visit<span class="visually-hidden"> BHDD-OIDD (opens in a new tab)</span></a>
       </div>
 
       <div class="res__item">
@@ -567,7 +642,7 @@ resources = phero(
           <h3>BabyNet Central Directory</h3>
           <p>An online directory of services for children birth to three with developmental delays or disabilities, managed by Family Connection of South Carolina.</p>
         </div>
-        <a class="btn btn--ghost" href="https://www.scdhhs.gov/resources/programs-and-initiatives/babynet/families/babynet-central-directory" target="_blank" rel="noopener">Visit &rarr;</a>
+        <a class="btn btn--ghost" href="https://www.scdhhs.gov/resources/programs-and-initiatives/babynet/families/babynet-central-directory" target="_blank" rel="noopener">Visit<span class="visually-hidden"> the Central Directory (opens in a new tab)</span></a>
       </div>
     </div>
   </div>
@@ -576,7 +651,7 @@ resources = phero(
 <section class="band band--white">
   <div class="wrap">
     <div class="shead rv">
-      <p class="eyebrow">{STEPMARK}For families</p>
+      <p class="eyebrow">{SM}For families</p>
       <h2>Understanding development</h2>
     </div>
 
@@ -584,98 +659,96 @@ resources = phero(
       <div class="res__item">
         <div>
           <h3>CDC &mdash; Learn the Signs. Act Early.</h3>
-          <p>Free milestone checklists for every age from two months to five years, in a dozen languages. The source our milestones page draws from.</p>
+          <p>Free milestone checklists for every age from two months to five years, in a dozen languages. This is the source our milestones page draws from.</p>
         </div>
-        <a class="btn btn--ghost" href="https://www.cdc.gov/act-early/index.html" target="_blank" rel="noopener">Visit &rarr;</a>
+        <a class="btn btn--ghost" href="https://www.cdc.gov/act-early/index.html" target="_blank" rel="noopener">Visit<span class="visually-hidden"> Learn the Signs. Act Early. (opens in a new tab)</span></a>
       </div>
 
       <div class="res__item">
         <div>
           <h3>CDC Milestone Tracker app</h3>
-          <p>Interactive, illustrated checklists on your phone, with photos and video of what each milestone looks like. Free for iOS and Android.</p>
+          <p>Interactive, illustrated checklists on your phone, with reminders and tips. Free for iOS and Android.</p>
         </div>
-        <a class="btn btn--ghost" href="https://www.cdc.gov/act-early/milestones/index.html" target="_blank" rel="noopener">Visit &rarr;</a>
+        <a class="btn btn--ghost" href="https://www.cdc.gov/act-early/milestones/index.html" target="_blank" rel="noopener">Visit<span class="visually-hidden"> the Milestone Tracker app page (opens in a new tab)</span></a>
       </div>
 
       <div class="res__item">
         <div>
           <h3>Milestones in Action</h3>
-          <p>A photo and video library showing what each milestone actually looks like &mdash; useful when a checklist item is hard to picture.</p>
+          <p>A photo and video library showing what each milestone actually looks like, which helps when a checklist item is hard to picture.</p>
         </div>
-        <a class="btn btn--ghost" href="https://www.cdc.gov/act-early/milestones-in-action/index.html" target="_blank" rel="noopener">Visit &rarr;</a>
+        <a class="btn btn--ghost" href="https://www.cdc.gov/act-early/milestones-in-action/index.html" target="_blank" rel="noopener">Visit<span class="visually-hidden"> Milestones in Action (opens in a new tab)</span></a>
       </div>
     </div>
 
-    <div class="ms__disc rv" style="margin-top:2rem">
+    <div class="ms__disc rv" style="margin-top:2.2rem">
       <p><strong>A note on the obvious.</strong> Several links here go to programs you can use without
-      ever contacting us. That's on purpose. If BabyNet is the right door for your family and we're not,
-      we'd rather you walk through it than wait. Call the Central Referral Team at 1-866-512-8881.</p>
+      ever contacting us. That is on purpose. If BabyNet is the right door for your family and we are
+      not, we would rather you walk through it than wait. The Central Referral Team is at
+      <a href="tel:+18665128881">1-866-512-8881</a>.</p>
     </div>
   </div>
 </section>'''
 
-# ============================================================ ABOUT
+# ================================================================= ABOUT
 about = phero(
     "About",
-    "Family partnership isn't a tagline here",
-    "Early Bloomers exists because the first three years only happen once, and no family should "
-    "have to navigate them alone or guess at the system."
+    f"Hi, I'm {OWNER}",
+    f"{OWNER_TITLE} at Early Bloomers LLC, serving families across {COUNTIES_SHORT} counties."
 ) + f'''
 <section class="band">
   <div class="wrap">
-    <div class="split rv">
-      <img src="Images/Image4.jpg" alt="[Replace: a photo of your lead Early Interventionist working with a child]">
-      <div>
-        <p class="eyebrow">{STEPMARK}Our story</p>
-        <h2>Why we started</h2>
-        <p>[Replace this with your real story &mdash; who founded Early Bloomers, why, and what
-        families can expect from you. Two or three short paragraphs. This is the section parents
-        read most carefully, because they're deciding whether to trust you with their child.]</p>
-        <p>[Specifics beat adjectives. Where you trained, how many years in early intervention,
-        what you believe about how children learn, and what changed in you the day you decided to
-        do this. "Passionate about children" is what every site says. What's the thing only you
-        can say?]</p>
-        <ul class="creds">
-          <li>
-            <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.8-4.3 4.1 1 5.8L10 14.3 4.8 17l1-5.8L1.5 7.1l5.9-.8L10 1z"/></svg>
-            <span>[BabyNet participating provider &mdash; confirm and state it plainly]</span>
-          </li>
-          <li>
-            <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.8-4.3 4.1 1 5.8L10 14.3 4.8 17l1-5.8L1.5 7.1l5.9-.8L10 1z"/></svg>
-            <span>[Degrees and field &mdash; e.g. B.A. Psychology, Anderson University]</span>
-          </li>
-          <li>
-            <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.8-4.3 4.1 1 5.8L10 14.3 4.8 17l1-5.8L1.5 7.1l5.9-.8L10 1z"/></svg>
-            <span>[Years of experience in early intervention]</span>
-          </li>
-          <li>
-            <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.8-4.3 4.1 1 5.8L10 14.3 4.8 17l1-5.8L1.5 7.1l5.9-.8L10 1z"/></svg>
-            <span>[Counties served]</span>
-          </li>
-        </ul>
-      </div>
+    <div class="shead rv">
+      <p class="eyebrow">{SM}Why I started Early Bloomers</p>
+      <h2>Known, supported, and encouraged</h2>
+    </div>
+
+    <div style="max-width:68ch">
+      <p class="lede rv" style="max-width:none">
+        I started Early Bloomers because I wanted to serve families in a more personal,
+        relationship-centered way. After years of working in early intervention, I felt called to
+        build a company where children and families are truly known, supported, and encouraged
+        every step of the way.
+      </p>
+      <p class="lede rv" style="max-width:none">
+        I believe parents are the most important people in a child's development. My goal is to
+        partner with families by providing practical strategies that fit naturally into their daily
+        routines, celebrating every milestone along the way. I strive to build genuine
+        relationships, communicate openly, and create individualized plans that help each child
+        reach their fullest potential.
+      </p>
+
+      <ul class="creds rv">
+        <li>{STAR}<span>BabyNet Early Intervention Provider</span></li>
+        <li>{STAR}<span>South Carolina BHDD-OIDD Provider</span></li>
+        <li>{STAR}<span>Bachelor of Arts in Elementary Education, Bob Jones University, 2011</span></li>
+        <li>{STAR}<span>In early intervention since 2015, with over eleven years of experience</span></li>
+        <li>{STAR}<span>Serving {COUNTIES}</span></li>
+      </ul>
     </div>
   </div>
 </section>
 
-<section class="band band--leaf">
+{slogan_band()}
+
+<section class="band band--white">
   <div class="wrap">
     <div class="shead rv center">
-      <p class="eyebrow">{STEPMARK}What we believe</p>
-      <h2>Four things we hold to</h2>
+      <p class="eyebrow">{SM}What I believe</p>
+      <h2>Three things I hold to</h2>
     </div>
     <div class="tiles rv">
       <div class="tile">
         <h3>You lead</h3>
-        <p>Families take the lead role in helping their child. We bring strategies and information; you bring the expertise on your own child. That order matters.</p>
+        <p>Parents are the most important people in a child's development. I bring strategies and information. You bring the expertise on your own child. That order matters.</p>
       </div>
       <div class="tile">
         <h3>Ordinary moments do the work</h3>
-        <p>Infants and toddlers learn best with familiar people in familiar places. An hour a week matters because of what it changes in the other hundred and sixty-seven.</p>
+        <p>Strategies should fit naturally into the routines you already have. An hour a week matters because of what it changes in the other hundred and sixty-seven.</p>
       </div>
       <div class="tile">
-        <h3>Plain language, always</h3>
-        <p>If we explain something and you leave more confused than you arrived, we did it wrong. Ask us to say it again, differently. We won't mind.</p>
+        <h3>Every step gets celebrated</h3>
+        <p>Progress in early intervention is rarely a leap. It's a step, then another. Each one is worth stopping to notice, and I will notice them with you.</p>
       </div>
     </div>
   </div>
@@ -684,99 +757,145 @@ about = phero(
 <section class="band">
   <div class="wrap">
     <div class="shead rv center">
-      <p class="eyebrow">{STEPMARK}Questions</p>
+      <p class="eyebrow">{SM}Questions</p>
       <h2>The things families ask first</h2>
     </div>
 
     <div class="faq rv">
       <details open>
         <summary>What ages do you work with?</summary>
-        <div class="faq__a"><p>[Replace &mdash; e.g. birth to three through BabyNet, and up to age six through OIDD. Confirm your own range.]</p></div>
+        <div class="faq__a"><p>Birth to five years old. Children under three are typically served through BabyNet, and children over three through BHDD-OIDD.</p></div>
       </details>
       <details>
         <summary>Do I need a referral from my pediatrician?</summary>
-        <div class="faq__a"><p>No. Anyone can make a referral &mdash; a parent, doctor, caregiver, teacher, or friend. You can contact us directly, or call the BabyNet Central Referral Team at 1-866-512-8881 yourself.</p></div>
+        <div class="faq__a"><p>No. Anyone can make a referral: a parent, doctor, caregiver, teacher, or friend. You can contact me directly, or call the BabyNet Central Referral Team yourself at 1-866-512-8881.</p></div>
       </details>
       <details>
         <summary>What does it cost?</summary>
-        <div class="faq__a"><p>Children who meet BabyNet eligibility criteria are served regardless of family income, and BabyNet services are provided at no cost to families. [Confirm this reflects your situation, and add anything specific about services outside BabyNet.]</p></div>
+        <div class="faq__a"><p>Children who meet BabyNet eligibility criteria are served regardless of family income, and BabyNet services are provided at no cost to families.</p></div>
       </details>
       <details>
         <summary>Where do sessions happen?</summary>
-        <div class="faq__a"><p>[Replace &mdash; home, daycare, community? What's your travel radius, and which counties?]</p></div>
+        <div class="faq__a"><p>In your home, at your child's daycare, or in community settings. Whichever fits your family's routine best.</p></div>
+      </details>
+      <details>
+        <summary>Which counties do you serve?</summary>
+        <div class="faq__a"><p>{COUNTIES}. Three counties, because I drive to you, and I would rather cover a smaller area well than a wider one thinly.</p></div>
       </details>
       <details>
         <summary>Do you provide speech, occupational, or physical therapy?</summary>
-        <div class="faq__a"><p>Not directly. We provide early intervention and service coordination, and we link families to qualified providers for speech, physical, and occupational therapy, and assistive technology. We stay involved so the pieces work together.</p></div>
+        <div class="faq__a"><p>Not directly. I provide early intervention and developmental services and coordinate care. Speech therapy, occupational therapy, physical therapy, ABA, and other specialized services are referred to appropriate providers when your child needs them.</p></div>
       </details>
       <details>
-        <summary>What happens when my child turns three?</summary>
-        <div class="faq__a"><p>BabyNet eligibility ends at three. Some children continue with services through BHDD-OIDD up to age six; others transition to their school district; others don't need anything further. We start planning that step well before the birthday. [Confirm and add your specifics.]</p></div>
+        <summary>What are your hours?</summary>
+        <div class="faq__a"><p>{HOURS}.</p></div>
       </details>
       <details>
         <summary>What if I'm not sure anything's actually wrong?</summary>
-        <div class="faq__a"><p>That's the most common reason families call, and it's a good reason. An evaluation costs nothing and often ends with confirmation that your child is right on track. Knowing beats wondering, and if support would help, starting sooner makes it work better.</p></div>
+        <div class="faq__a"><p>That is the most common reason families call, and it's a good reason. An evaluation costs nothing and often ends with confirmation that your child is right on track. Knowing beats wondering, and if support would help, starting sooner makes it work better.</p></div>
       </details>
     </div>
   </div>
 </section>'''
 
-# ============================================================ CONTACT
+# ================================================================= CONTACT
 contact = phero(
     "Refer a child",
     "Let's start with a conversation",
-    "Tell us what you're noticing and we'll tell you honestly whether we think we can help &mdash; "
-    "and if we're not the right fit, we'll point you to who is."
+    "Tell me what you're noticing and I'll tell you honestly whether I think I can help. If I'm "
+    "not the right fit, I'll point you to who is."
 ) + f'''
-<section class="band">
+<section class="band" aria-labelledby="contact-h">
   <div class="wrap">
+    <h2 class="visually-hidden" id="contact-h">Contact form and details</h2>
     <div class="contact rv">
-      <form class="form" action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST">
-        <div class="field">
-          <label for="name">Your name</label>
-          <input id="name" name="name" type="text" autocomplete="name" required>
+      <form class="form" id="contact-form" data-to="{EMAIL}"
+            action="https://formsubmit.co/{EMAIL}" method="POST">
+
+        <!-- FormSubmit configuration -->
+        <input type="hidden" name="_subject" value="New referral from the Early Bloomers website">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <fieldset>
+          <legend>About you</legend>
+
+          <div class="field">
+            <label for="name">Your name <span class="req" aria-hidden="true">*</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" required aria-required="true">
+          </div>
+
+          <div class="field">
+            <label for="rel">You are the child's&hellip;</label>
+            <select id="rel" name="relationship">
+              <option value="">Select one</option>
+              <option>Parent or guardian</option>
+              <option>Doctor or health provider</option>
+              <option>Caregiver or teacher</option>
+              <option>Friend or family member</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required aria-required="true">
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>About the child</legend>
+
+          <div class="field">
+            <label for="age">Age</label>
+            <select id="age" name="child_age">
+              <option value="">Select an age</option>
+              <option>Under 6 months</option>
+              <option>6&ndash;12 months</option>
+              <option>12&ndash;18 months</option>
+              <option>18&ndash;24 months</option>
+              <option>2&ndash;3 years</option>
+              <option>3&ndash;5 years</option>
+              <option>Over 5 years</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="county">County</label>
+            <select id="county" name="county">
+              <option value="">Select a county</option>
+              <option>Greenville</option>
+              <option>Spartanburg</option>
+              <option>Pickens</option>
+              <option>Somewhere else</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="msg">What are you noticing? <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="msg" name="message" required aria-required="true" aria-describedby="msg-hint"></textarea>
+            <p class="hint" id="msg-hint">It's okay to be vague. &ldquo;He's almost two and not really talking yet&rdquo; is plenty to start with.</p>
+          </div>
+        </fieldset>
+
+        <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+
+        <div>
+          <button class="btn btn--primary" type="submit" id="form-submit">Send message</button>
         </div>
-        <div class="field">
-          <label for="rel">You are the child's&hellip;</label>
-          <select id="rel" name="relationship">
-            <option value="">Select one</option>
-            <option>Parent or guardian</option>
-            <option>Doctor or health provider</option>
-            <option>Caregiver or teacher</option>
-            <option>Friend or family member</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="phone">Phone</label>
-          <input id="phone" name="phone" type="tel" autocomplete="tel">
-        </div>
-        <div class="field">
-          <label for="age">The child's age</label>
-          <select id="age" name="child_age">
-            <option value="">Select an age</option>
-            <option>Under 6 months</option>
-            <option>6&ndash;12 months</option>
-            <option>12&ndash;18 months</option>
-            <option>18&ndash;24 months</option>
-            <option>2&ndash;3 years</option>
-            <option>Over 3 years</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="county">County</label>
-          <input id="county" name="county" type="text" placeholder="e.g. Greenville">
-        </div>
-        <div class="field">
-          <label for="msg">What are you noticing?</label>
-          <textarea id="msg" name="message" placeholder="It's okay to be vague. &quot;He's almost two and not really talking yet&quot; is plenty to start with." required></textarea>
-        </div>
-        <button class="btn btn--primary" type="submit">Send message</button>
-        <p class="form__note">Please don't include sensitive medical details in this form &mdash; we'll cover those securely once we're in touch.</p>
+
+        <p class="form__note">
+          <strong>What happens to what you send.</strong> This form is delivered to
+          {EMAIL} and is used only to respond to you. It is not sold, shared, or added
+          to any mailing list. Please don't include sensitive medical details here, since email
+          isn't a secure channel. We'll cover those by phone once we're in touch.
+        </p>
       </form>
 
       <div>
@@ -792,38 +911,46 @@ contact = phero(
             <dt>Email</dt>
             <dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd>
 
-            <dt>Service area</dt>
-            <dd>[Your counties, SC]</dd>
-
             <dt>Hours</dt>
-            <dd>[e.g. Monday&ndash;Friday, 8am&ndash;5pm]</dd>
+            <dd>{HOURS}</dd>
+
+            <dt>Service area</dt>
+            <dd>{COUNTIES}</dd>
           </dl>
         </div>
 
-        <div class="ms__disc" style="margin-top:20px">
+        <div class="ms__disc" style="margin-top:22px">
           <p><strong>You can also skip us entirely.</strong> To refer a child from birth to three
           directly to South Carolina's early intervention system, call the BabyNet Central Referral
-          Team at <a href="tel:+18665128881">1-866-512-8881</a>. Anyone can make that referral, and
-          it costs nothing. If we're not the right provider for your family, that number still is.</p>
+          Team at <a href="tel:+18665128881">1-866-512-8881</a>. Anyone can make that referral and
+          it costs nothing. If we are not the right provider for your family, that number still is.</p>
         </div>
       </div>
     </div>
   </div>
 </section>'''
 
+# ================================================================= WRITE
 PAGES = [
-    ("index.html", "Early Bloomers &mdash; Early Intervention for Infants &amp; Toddlers",
-     "Early Bloomers provides early intervention, developmental assessments, and service coordination for infants and toddlers in South Carolina. Growing little minds one step at a time.", home),
-    ("services.html", "Services &mdash; Early Bloomers",
-     "Early intervention sessions, developmental assessments every six months, and service coordination that links your family to speech, OT, and PT.", services),
-    ("milestones.html", "Milestones by Age &mdash; Early Bloomers",
-     "Developmental milestones by age, adapted from the CDC's Learn the Signs. Act Early. program. A conversation starter, not a screening tool.", milestones),
-    ("resources.html", "Resources &mdash; Early Bloomers",
-     "BabyNet, BHDD-OIDD, CDC milestone checklists, and the other doors into early intervention in South Carolina.", resources),
-    ("about.html", "About &mdash; Early Bloomers",
-     "Who we are, what we believe about early intervention, and the questions families ask first.", about),
-    ("contact.html", "Refer a Child &mdash; Early Bloomers",
-     f"Contact Early Bloomers at {PHONE_DISPLAY} or {EMAIL}. Anyone can refer a child &mdash; parent, doctor, caregiver, teacher, or friend.", contact),
+    ("index.html",
+     "Early Bloomers LLC &mdash; Early Intervention in Greenville, Spartanburg &amp; Pickens, SC",
+     f"Early Bloomers LLC provides early intervention, developmental assessments, and service coordination for children birth to five across Greenville, Spartanburg, and Pickens counties, SC. {SLOGAN}",
+     home),
+    ("services.html", "Services &mdash; Early Bloomers LLC",
+     "Early intervention sessions, developmental assessments across six areas, and service coordination linking your family to speech, OT, PT, and ABA.",
+     services),
+    ("milestones.html", "Milestones by Age &mdash; Early Bloomers LLC",
+     "Developmental milestones from birth to five, adapted from the CDC's Learn the Signs. Act Early. program. A conversation starter, not a screening tool.",
+     milestones),
+    ("resources.html", "Resources &mdash; Early Bloomers LLC",
+     "BabyNet, BHDD-OIDD, CDC milestone checklists, and the other doors into early intervention in South Carolina.",
+     resources),
+    ("about.html", f"About {OWNER} &mdash; Early Bloomers LLC",
+     f"{OWNER}, {OWNER_TITLE}. BabyNet and BHDD-OIDD provider serving Greenville, Spartanburg, and Pickens counties since 2015.",
+     about),
+    ("contact.html", "Refer a Child &mdash; Early Bloomers LLC",
+     f"Contact Early Bloomers LLC at {PHONE_DISPLAY} or {EMAIL}. Anyone can refer a child: parent, doctor, caregiver, teacher, or friend.",
+     contact),
 ]
 
 for name, title, desc, body in PAGES:
