@@ -228,7 +228,7 @@ home = f'''<section class="hero wrap">
     <div class="cards rv">
       <article class="card">
         <img src="Images/Image2.avif" width="600" height="450"
-             alt="An adult and a young child sitting together on the floor during a play-based learning activity">
+             alt="An adult and a young child sitting together at a table during a play-based learning activity">
         <div class="card__body">
           <h3>Early Intervention Sessions</h3>
           <p>Regular one-hour visits with you and your child, using play-based strategies built around what already holds their attention.</p>
@@ -258,7 +258,7 @@ home = f'''<section class="hero wrap">
 
       <article class="card">
         <img src="Images/Image4.jpg" width="600" height="450"
-             alt="A caregiver holding a baby during a relaxed home visit">
+             alt="Three young children playing together with toys on the floor">
         <div class="card__body">
           <h3>Service Coordination</h3>
           <p>One person who keeps the whole picture straight, links you to outside resources, and makes referrals so you're not holding the system together alone.</p>
@@ -345,7 +345,7 @@ services = phero(
     <div class="cards rv">
       <article class="card">
         <img src="Images/Image2.avif" width="600" height="450"
-             alt="An adult and a young child sitting together on the floor during a play-based learning activity">
+             alt="An adult and a young child sitting together at a table during a play-based learning activity">
         <div class="card__body">
           <h3>Early Intervention Sessions</h3>
           <p>A one-hour session with you and your child, using play-based strategies to help your child learn and grow. It's also your time to ask questions and learn how best to help.</p>
@@ -375,7 +375,7 @@ services = phero(
 
       <article class="card">
         <img src="Images/Image4.jpg" width="600" height="450"
-             alt="A caregiver holding a baby during a relaxed home visit">
+             alt="Three young children playing together with toys on the floor">
         <div class="card__body">
           <h3>Service Coordination</h3>
           <p>Linking your family to outside resources and making referrals for other services, so the pieces work together instead of landing on you to assemble.</p>
