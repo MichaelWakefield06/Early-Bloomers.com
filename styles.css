@@ -311,6 +311,26 @@ a:hover{color:var(--leaf)}
 .creds{list-style:none;padding:0;margin:1.6rem 0 0;display:grid;gap:12px}
 .creds li{display:flex;gap:12px;align-items:flex-start;font-size:1.04rem}
 .creds svg{flex:0 0 auto;margin-top:.3em;color:var(--leaf)}
+/* Credentials spread across the full width once they sit below the split */
+.creds--wide{
+  margin-top:clamp(28px,4vw,48px);
+  grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));
+  gap:12px 32px;
+}
+
+/* ---------- Portrait ---------- */
+.split{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,4.5vw,56px);align-items:center}
+.portrait{margin:0}
+/* No forced aspect-ratio: the photo keeps its own proportions rather than
+   being cropped to a guess. */
+.portrait img{
+  width:100%;height:auto;border-radius:var(--r-lg);
+  box-shadow:var(--shadow);background:var(--leaf-pale);
+}
+.portrait figcaption{
+  margin-top:.9rem;font-size:.96rem;color:var(--ink-soft);
+  font-weight:700;line-height:1.4;
+}
 
 /* ---------- FAQ ---------- */
 .faq{max-width:860px;margin:0 auto}
@@ -406,9 +426,12 @@ a:hover{color:var(--leaf)}
   .nav a{padding:8px 10px;font-size:.96rem}
 }
 @media (max-width:980px){
-  .hero__grid,.contact{grid-template-columns:1fr}
+  .hero__grid,.contact,.split{grid-template-columns:1fr}
   .hero__art{order:-1}
   .hero__badge{left:auto;right:16px;bottom:-16px}
+  /* Stacked, the portrait would otherwise stretch the full column width */
+  .portrait{max-width:440px;margin-inline:auto}
+  .portrait figcaption{text-align:center}
 }
 @media (max-width:860px){
   .nav{
