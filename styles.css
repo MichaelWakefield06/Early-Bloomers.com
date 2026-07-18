@@ -439,18 +439,23 @@ a:hover{color:var(--leaf)}
 }
 @media (max-width:980px){
   .hero__grid,.contact,.split{grid-template-columns:1fr}
-  .hero__art{order:-1}
+  /* Headline leads on a phone. The image used to sit above it and swallow
+     the whole first screen. */
+  .hero__art{order:1}
+  .hero__art img{aspect-ratio:16/10}
   .hero__badge{left:auto;right:16px;bottom:-16px}
-  /* Stacked, the portrait would otherwise stretch the full column width */
   .portrait{max-width:440px;margin-inline:auto}
   .portrait figcaption{text-align:center}
 }
 @media (max-width:860px){
+  /* Anchored to the header rather than a guessed pixel offset, so it stays
+     put as the fluid logo changes the header height. */
   .nav{
-    position:fixed;inset:128px 0 auto;background:var(--paper);
+    position:absolute;top:100%;left:0;right:0;
+    background:var(--paper);
     flex-direction:column;align-items:stretch;gap:0;padding:16px 20px 26px;
     border-bottom:1px solid var(--rule);box-shadow:var(--shadow);display:none;
-    max-height:calc(100vh - 128px);overflow-y:auto;
+    max-height:72vh;overflow-y:auto;
   }
   .nav.open{display:flex}
   .nav a{padding:15px 10px;border-radius:8px;font-size:1.1rem}
@@ -460,7 +465,6 @@ a:hover{color:var(--leaf)}
   .res__item{grid-template-columns:1fr}
 }
 @media (max-width:600px){
-  .nav{inset:104px 0 auto;max-height:calc(100vh - 104px)}
   .hero__actions .btn{width:100%}
   .hero__badge{position:static;margin-top:16px;max-width:none}
   .steps__item{grid-template-columns:64px 1fr;gap:18px}
