@@ -22,6 +22,7 @@ COUNTIES = "Greenville, Spartanburg, and Pickens counties, South Carolina"
 COUNTIES_SHORT = "Greenville, Spartanburg &amp; Pickens"
 AGES = "birth to five"
 BUILDER = "WB3 Ventures LLC"
+SITE = "https://early-bloomers.com"
 
 NAV = [
     ("index.html", "Home"),
@@ -41,7 +42,7 @@ STAR = ('<svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" ari
         'focusable="false"><path d="M10 1l2.6 5.3 5.9.8-4.3 4.1 1 5.8L10 14.3 4.8 17l1-5.8L1.5 7.1l5.9-.8L10 1z"/></svg>')
 
 
-def shell(page, title, desc, body):
+def shell(page, title, desc, body, og_image="Images/Image1.jpg"):
     links = ""
     for href, label in NAV:
         cur = ' aria-current="page"' if href == page else ""
@@ -60,8 +61,10 @@ def shell(page, title, desc, body):
 <meta property="og:site_name" content="Early Bloomers LLC">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="Images/Image1.jpg">
+<meta property="og:image" content="{SITE}/{og_image}">
+<meta property="og:url" content="{SITE}/{page}">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="{SITE}/{page}">
 <link rel="icon" href="Images/EBLogo1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -988,6 +991,10 @@ PAGES = [
      contact),
 ]
 
+OG = {"about.html": "Images/MichelleWakefieldLopez.jpg"}
+
 for name, title, desc, body in PAGES:
-    (OUT / name).write_text(shell(name, title, desc, body), encoding="utf-8")
+    (OUT / name).write_text(
+        shell(name, title, desc, body, OG.get(name, "Images/Image1.jpg")),
+        encoding="utf-8")
     print("wrote", name)
