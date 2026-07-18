@@ -14,7 +14,8 @@
   --peri-pale:#EDEEF9;
   --ink:#1F2A1D;          /* 13.89:1 on paper */
   --ink-soft:#5A6357;     /* 5.82:1 on paper */
-  --rule:rgba(31,42,29,.16);
+  --rule:rgba(31,42,29,.16);      /* decorative dividers — exempt from 1.4.11 */
+  --border-ui:rgba(31,42,29,.52);  /* interactive control borders — 3.2:1, meets 1.4.11 */
 
   --shadow-sm:0 1px 2px rgba(31,42,29,.06);
   --shadow:0 8px 30px rgba(31,42,29,.09);
@@ -157,7 +158,7 @@ a:hover{color:var(--leaf)}
 .nav a.nav__cta:hover,.nav a.nav__cta[aria-current="page"]{background:var(--leaf);color:#fff}
 
 .burger{
-  display:none;background:none;border:1.5px solid var(--rule);border-radius:10px;
+  display:none;background:none;border:1.5px solid var(--border-ui);border-radius:10px;
   min-width:var(--tap);min-height:var(--tap);align-items:center;justify-content:center;
   cursor:pointer;color:var(--ink);flex-direction:column;gap:4px;
 }
@@ -379,7 +380,7 @@ a:hover{color:var(--leaf)}
 .field label{display:block;font-size:.94rem;font-weight:700;margin-bottom:6px}
 .field .req{color:var(--leaf-deep)}
 .field input,.field textarea,.field select{
-  width:100%;padding:14px 16px;border:2px solid var(--rule);border-radius:10px;
+  width:100%;padding:14px 16px;border:2px solid var(--border-ui);border-radius:10px;
   font-family:var(--body);font-size:1.05rem;background:var(--white);color:var(--ink);
   min-height:var(--tap);
 }
