@@ -698,34 +698,40 @@ about = phero(
 ) + f'''
 <section class="band">
   <div class="wrap">
-    <div class="shead rv">
-      <p class="eyebrow">{SM}Why I started Early Bloomers</p>
-      <h2>Known, supported, and encouraged</h2>
+    <div class="split rv">
+      <figure class="portrait">
+        <img src="Images/MichelleWakefieldLopez.jpg"
+             alt="{OWNER}, {OWNER_TITLE} at Early Bloomers, pictured with her husband"
+             loading="lazy">
+        <figcaption>{OWNER}, {OWNER_TITLE}</figcaption>
+      </figure>
+
+      <div>
+        <p class="eyebrow">{SM}Why I started Early Bloomers</p>
+        <h2>Known, supported, and encouraged</h2>
+        <p class="lede" style="max-width:none;margin-top:1.2rem">
+          I started Early Bloomers because I wanted to serve families in a more personal,
+          relationship-centered way. After years of working in early intervention, I felt called to
+          build a company where children and families are truly known, supported, and encouraged
+          every step of the way.
+        </p>
+        <p class="lede" style="max-width:none">
+          I believe parents are the most important people in a child's development. My goal is to
+          partner with families by providing practical strategies that fit naturally into their daily
+          routines, celebrating every milestone along the way. I strive to build genuine
+          relationships, communicate openly, and create individualized plans that help each child
+          reach their fullest potential.
+        </p>
+      </div>
     </div>
 
-    <div style="max-width:68ch">
-      <p class="lede rv" style="max-width:none">
-        I started Early Bloomers because I wanted to serve families in a more personal,
-        relationship-centered way. After years of working in early intervention, I felt called to
-        build a company where children and families are truly known, supported, and encouraged
-        every step of the way.
-      </p>
-      <p class="lede rv" style="max-width:none">
-        I believe parents are the most important people in a child's development. My goal is to
-        partner with families by providing practical strategies that fit naturally into their daily
-        routines, celebrating every milestone along the way. I strive to build genuine
-        relationships, communicate openly, and create individualized plans that help each child
-        reach their fullest potential.
-      </p>
-
-      <ul class="creds rv">
-        <li>{STAR}<span>BabyNet Early Intervention Provider</span></li>
-        <li>{STAR}<span>South Carolina BHDD-OIDD Provider</span></li>
-        <li>{STAR}<span>Bachelor of Arts in Elementary Education, Bob Jones University, 2011</span></li>
-        <li>{STAR}<span>In early intervention since 2015, with over eleven years of experience</span></li>
-        <li>{STAR}<span>Serving {COUNTIES}</span></li>
-      </ul>
-    </div>
+    <ul class="creds creds--wide rv">
+      <li>{STAR}<span>BabyNet Early Intervention Provider</span></li>
+      <li>{STAR}<span>South Carolina BHDD-OIDD Provider</span></li>
+      <li>{STAR}<span>Bachelor of Arts in Elementary Education, Bob Jones University, 2011</span></li>
+      <li>{STAR}<span>In early intervention since 2015, with over eleven years of experience</span></li>
+      <li>{STAR}<span>Serving {COUNTIES}</span></li>
+    </ul>
   </div>
 </section>
 
