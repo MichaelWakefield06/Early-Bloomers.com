@@ -379,6 +379,8 @@ a:hover{color:var(--leaf)}
 }
 .field label{display:block;font-size:.94rem;font-weight:700;margin-bottom:6px}
 .field .req{color:var(--leaf-deep)}
+.form__req{font-size:.94rem;color:var(--ink-soft);margin:0 0 .2rem}
+.form__req .req{color:var(--leaf-deep);font-weight:700}
 .field input,.field textarea,.field select{
   width:100%;padding:14px 16px;border:2px solid var(--border-ui);border-radius:10px;
   font-family:var(--body);font-size:1.05rem;background:var(--white);color:var(--ink);
