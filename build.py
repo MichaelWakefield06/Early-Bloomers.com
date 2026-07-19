@@ -718,10 +718,9 @@ about = phero(
           <p>
             My name is {OWNER}, and I am the owner of Early Bloomers Early Intervention.
             Early Bloomers was born from a leap of faith and a deep passion for serving children
-            and families. After nearly a decade as an Early Interventionist, I felt God calling me
-            to step out of the familiar and build something of my own: an organization rooted in
-            compassion, excellence, and the belief that every child deserves the opportunity to
-            thrive.
+            and families. After more than 11 years as an Early Interventionist, I felt God calling
+            me to step out of the familiar and build something of my own: an organization rooted in
+            compassion, and the belief that every child deserves the opportunity to thrive.
           </p>
         </div>
       </div>
@@ -730,22 +729,20 @@ about = phero(
     <div class="story story--full rv">
       <p>
         The journey wasn't without uncertainty. Starting a business came with countless unknowns,
-        but God faithfully opened doors every step of the way. During the development of Early
-        Bloomers, Bloom &amp; Blossom graciously welcomed me, providing support, encouragement, and
-        the opportunity to continue serving families while laying the foundation for my own company.
-        Their kindness became an important stepping stone in turning this dream into reality.
+        but God faithfully opened doors every step of the way and continually reminded me that His
+        plans are greater than my own.
       </p>
       <p>
-        Soon after taking that leap, my husband and I received another incredible blessing: we found
-        out we were expecting our miracle baby after several years of infertility. It was a season
-        filled with both new beginnings and constant reminders of God's faithfulness. As Early
-        Bloomers continued to grow, so did my appreciation for His perfect timing.
+        Soon after taking that leap, my husband and I received another incredible blessing: after
+        several years of infertility, we found out we were expecting our miracle baby. It became a
+        season of incredible new beginnings and constant reminders of God's faithfulness. As Early
+        Bloomers continued to take shape, so did my appreciation for His perfect timing.
       </p>
       <p>
         Today, Early Bloomers Early Intervention exists to partner with families, celebrate every
-        milestone, and empower children to reach their fullest potential. I am honored to walk
+        milestone, and empower children to reach their fullest potential. It is a privilege to walk
         alongside families during some of the most important years of their children's lives, and I
-        look forward to growing little minds one step at a time.
+        look forward to helping little ones grow, learn, and thrive one step at a time.
       </p>
     </div>
 
