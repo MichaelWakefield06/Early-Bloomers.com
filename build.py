@@ -42,7 +42,7 @@ STAR = ('<svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" ari
         'focusable="false"><path d="M10 1l2.6 5.3 5.9.8-4.3 4.1 1 5.8L10 14.3 4.8 17l1-5.8L1.5 7.1l5.9-.8L10 1z"/></svg>')
 
 
-def shell(page, title, desc, body, og_image="Images/Image1.jpg"):
+def shell(page, title, desc, body, og_image="Images/child-sitting-on-floor-with-stuffed-animal.jpg"):
     links = ""
     for href, label in NAV:
         cur = ' aria-current="page"' if href == page else ""
@@ -185,8 +185,8 @@ home = f'''<section class="hero wrap">
     </div>
 
     <div class="hero__art">
-      <img src="Images/Image1.jpg" width="800" height="680" fetchpriority="high"
-           alt="A toddler sitting on a rug, focused on pushing a wooden toy train along a track">
+      <img src="Images/child-sitting-on-floor-with-stuffed-animal.jpg" width="800" height="680" fetchpriority="high"
+           alt="A young child sitting on the floor holding a stuffed animal">
       <div class="hero__badge">
         <b>No cost</b>
         <span>Children who meet BabyNet eligibility are served regardless of family income.</span>
@@ -227,8 +227,8 @@ home = f'''<section class="hero wrap">
 
     <div class="cards rv">
       <article class="card">
-        <img src="Images/Image2.avif" width="600" height="450"
-             alt="An adult and a young child sitting together at a table during a play-based learning activity">
+        <img src="Images/child-playing-on-floor-with-word-puzzle.jpg" width="600" height="450"
+             alt="A young child sitting on the floor playing with a word puzzle">
         <div class="card__body">
           <h3>Early Intervention Sessions</h3>
           <p>Regular one-hour visits with you and your child, using play-based strategies built around what already holds their attention.</p>
@@ -242,8 +242,8 @@ home = f'''<section class="hero wrap">
       </article>
 
       <article class="card">
-        <img src="Images/Image3.png" width="600" height="450"
-             alt="A young child stacking colourful wooden blocks on a table">
+        <img src="Images/Baby_on_ground_with_plastic_easter_eggs.jpg" width="600" height="450"
+             alt="A baby on the floor reaching for colourful plastic Easter eggs">
         <div class="card__body">
           <h3>Developmental Assessments</h3>
           <p>A look at the whole child across six areas of development, so everyone can see what's moved and decide what comes next together.</p>
@@ -257,8 +257,8 @@ home = f'''<section class="hero wrap">
       </article>
 
       <article class="card">
-        <img src="Images/Image4.jpg" width="600" height="450"
-             alt="Three young children playing together with toys on the floor">
+        <img src="Images/EarlyInterventionis_helping_child_walk_across_log.jpg" width="600" height="450"
+             alt="An early interventionist helping a young child balance while walking across a log outdoors">
         <div class="card__body">
           <h3>Service Coordination</h3>
           <p>One person who keeps the whole picture straight, links you to outside resources, and makes referrals so you're not holding the system together alone.</p>
@@ -344,8 +344,8 @@ services = phero(
     <h2 class="visually-hidden" id="svc-h">What we provide</h2>
     <div class="cards rv">
       <article class="card">
-        <img src="Images/Image2.avif" width="600" height="450"
-             alt="An adult and a young child sitting together at a table during a play-based learning activity">
+        <img src="Images/child-playing-on-floor-with-word-puzzle.jpg" width="600" height="450"
+             alt="A young child sitting on the floor playing with a word puzzle">
         <div class="card__body">
           <h3>Early Intervention Sessions</h3>
           <p>A one-hour session with you and your child, using play-based strategies to help your child learn and grow. It's also your time to ask questions and learn how best to help.</p>
@@ -359,8 +359,8 @@ services = phero(
       </article>
 
       <article class="card">
-        <img src="Images/Image3.png" width="600" height="450"
-             alt="A young child stacking colourful wooden blocks on a table">
+        <img src="Images/Baby_on_ground_with_plastic_easter_eggs.jpg" width="600" height="450"
+             alt="A baby on the floor reaching for colourful plastic Easter eggs">
         <div class="card__body">
           <h3>Developmental Assessments</h3>
           <p>An assessment across six areas of development, so we see the whole child rather than one slice of them, and so progress is visible to everyone.</p>
@@ -374,8 +374,8 @@ services = phero(
       </article>
 
       <article class="card">
-        <img src="Images/Image4.jpg" width="600" height="450"
-             alt="Three young children playing together with toys on the floor">
+        <img src="Images/EarlyInterventionis_helping_child_walk_across_log.jpg" width="600" height="450"
+             alt="An early interventionist helping a young child balance while walking across a log outdoors">
         <div class="card__body">
           <h3>Service Coordination</h3>
           <p>Linking your family to outside resources and making referrals for other services, so the pieces work together instead of landing on you to assemble.</p>
@@ -994,6 +994,6 @@ OG = {"about.html": "Images/MichelleWakefieldLopez.jpg"}
 
 for name, title, desc, body in PAGES:
     (OUT / name).write_text(
-        shell(name, title, desc, body, OG.get(name, "Images/Image1.jpg")),
+        shell(name, title, desc, body, OG.get(name, "Images/child-sitting-on-floor-with-stuffed-animal.jpg")),
         encoding="utf-8")
     print("wrote", name)
