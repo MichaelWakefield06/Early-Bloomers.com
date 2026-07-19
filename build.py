@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Early Bloomers LLC — static site generator.
+"""Early Bloomers LLC - static site generator.
 
 Edit the CONSTANTS below, run `python3 build.py`, and every page updates.
 Nothing here is required to host the site; GitHub Pages ignores this file.
