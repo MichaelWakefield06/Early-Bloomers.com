@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Early Bloomers LLC - static site generator.
+"""Early Bloomers LLC — static site generator.
 
 Edit the CONSTANTS below, run `python3 build.py`, and every page updates.
 Nothing here is required to host the site; GitHub Pages ignores this file.
@@ -309,7 +309,7 @@ home = f'''<section class="hero wrap">
 
 <section class="band">
   <div class="wrap">
-    <figure class="quote rv" style="max-width:900px;margin-inline:auto">
+    <figure class="quote rv" style="max-width:var(--story-measure);margin-inline:auto">
       <blockquote>
         &ldquo;I believe parents are the most important people in a child's development. My goal is to
         partner with families by providing practical strategies that fit naturally into their daily
@@ -746,7 +746,7 @@ about = phero(
       </p>
     </div>
 
-    <figure class="quote rv" style="max-width:900px;margin-inline:auto">
+    <figure class="quote rv" style="max-width:var(--story-measure);margin-inline:auto">
       <blockquote>
         &ldquo;More than just a business, it is the fulfillment of a calling and a testament to what
         God can do when we choose faith over fear.&rdquo;
